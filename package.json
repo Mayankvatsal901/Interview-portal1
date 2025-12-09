@@ -1,0 +1,23 @@
+{
+  "name": "interview-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "node backend/src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mayankvatsal901/Interview-portal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mayankvatsal901/Interview-portal/issues"
+  },
+  "homepage": "https://github.com/Mayankvatsal901/Interview-portal#readme"
+}
+
