@@ -2,11 +2,18 @@ import express from "express"
 import {ENV} from "./lib/env.js"
 import path from "path"
 import { connectDB } from "./lib/db.js";
+import cors from "cors"
+//import {syncUser,deleteUserFromDB} from "./lib/inngest.js"
+import {serve} from "inngest/express"
 
 
 const app=express();
 
 const __dirname=path.resolve()
+app.use(express.json())
+//credentials:server allows our browser to include the cokkies in request 
+app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
+//app.use("/api/inngest",serve({client:inngest,functions}))
 
 
 app.get("/hello",(req,res)=>{
@@ -18,7 +25,7 @@ app.get("/hello",(req,res)=>{
 if(ENV.NODE_ENV==="production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
 
-    app.get("/{*any}",(req,res)=>{
+    app.get("/{*splat}",(req,res)=>{
         res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
     })
 
