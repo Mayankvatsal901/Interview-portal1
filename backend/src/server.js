@@ -23,12 +23,14 @@ app.get("/hello",(req,res)=>{
 // make our app ready for the deployment
 // connects the backend and frontend it will send the static files of the frontend from dist folder 
 if(ENV.NODE_ENV==="production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist")))
+    const distPath = path.join(__dirname,"../frontend/dist")
+    
+    app.use(express.static(distPath))
 
-    app.get("*",(req,res)=>{
-        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    // Handle all routes by serving index.html (for React Router)
+    app.use("*", (req, res) => {
+        res.sendFile(path.join(distPath, "index.html"))
     })
-
 }
 const PORT = ENV.PORT || 5000;
 
